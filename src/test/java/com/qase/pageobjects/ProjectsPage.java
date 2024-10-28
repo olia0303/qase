@@ -11,6 +11,8 @@ import static com.qase.other.Urls.PROJECTS_PAGE;
 
 public class ProjectsPage extends BasePage {
 
+    private final String FIELD_XPATH = "//a[contains(text(),\"%s\")]/../../../..//span";
+
     @Override
     public ProjectsPage isPageOpened() {
         $(By.xpath(" //h1[contains(text(),'Projects')]")).shouldBe(Condition.visible);
@@ -35,7 +37,7 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage openProjectByName(String projectName) {
         SelenideElement el;
-        el = $(By.xpath(String.format("//a[contains(text(),\"%s\")]/../../../..//span", projectName)));
+        el = $(By.xpath(String.format(FIELD_XPATH, projectName)));
         el.click();
         return this;
     }
@@ -43,5 +45,15 @@ public class ProjectsPage extends BasePage {
     public ProjectsPage openProjectSettings() {
         $(By.xpath("//a[contains(text(),'Settings')]")).click();
         return this;
+    }
+
+    public ProjectsPage removeProject() {
+        $(By.xpath("//button[contains(text(),'Remove')]")).click();
+        $(By.xpath("//span[contains(text(),'Delete project')]")).click();
+        return this;
+    }
+
+    public boolean isProjectExist(String projectName) {
+        return $(By.xpath(String.format(FIELD_XPATH, projectName))).isDisplayed();
     }
 }
