@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorMessage(), "This field is required");
     }
 
-    @Test(description = "Check login with empty username and valid password")
+    @Test(description = "Check login with valid username and empty password")
     public void emptyPassword() {
         loginPage.openPage()
                 .logIn(testData.USER, "");

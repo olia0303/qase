@@ -1,6 +1,7 @@
 package com.qase.pageobjects;
 
 import com.codeborne.selenide.Condition;
+import com.qase.model.Project;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -23,5 +24,16 @@ public class ProjectSettingPage extends BasePage {
 
     public String getProjectDescription() {
         return $(PROJECT_DESCRIPTION).getText();
+    }
+
+    public ProjectSettingPage updateProjectSettings(Project project) {
+        $(PROJECT_NAME).clear();
+        $(PROJECT_NAME).sendKeys(project.getName());
+        $(PROJECT_CODE).clear();
+        $(PROJECT_CODE).sendKeys(project.getCode());
+        $(PROJECT_DESCRIPTION).clear();
+        $(PROJECT_DESCRIPTION).sendKeys(project.getDescription());
+        submit();
+        return this;
     }
 }
