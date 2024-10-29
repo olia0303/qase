@@ -38,8 +38,8 @@ public class ProjectTest extends BaseTest {
                 .openProjectByName(project.getName());
         assertTrue(projectsPage.isProjectExist(project.getName()));
         projectsPage.removeProject()
-                    .openPage()
-                    .isPageOpened();
+                .openPage()
+                .isPageOpened();
         assertFalse(projectsPage.isProjectExist(project.getName()));
     }
 }

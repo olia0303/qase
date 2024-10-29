@@ -11,7 +11,8 @@ import static com.qase.other.Urls.PROJECTS_PAGE;
 
 public class ProjectsPage extends BasePage {
 
-    private final String FIELD_XPATH = "//a[contains(text(),\"%s\")]/../../../..//span";
+    private final String FIELD_XPATH = "//a[contains(text(),\"%s\")]/following::td[5]//span";
+    private final String CREATE_BUTTON = "#createButton";
 
     @Override
     public ProjectsPage isPageOpened() {
@@ -26,12 +27,12 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage createNewProject(Project project) {
         isPageOpened();
-        $(By.id("createButton")).click();
-        $(By.id("project-name")).sendKeys(project.getName());
-        $(By.id("project-code")).clear();
-        $(By.id("project-code")).sendKeys(project.getCode());
-        $(By.id("description-area")).sendKeys(project.getDescription());
-        buttonPress();
+        $(CREATE_BUTTON).click();
+        $(PROJECT_NAME).sendKeys(project.getName());
+        $(PROJECT_CODE).clear();
+        $(PROJECT_CODE).sendKeys(project.getCode());
+        $(PROJECT_DESCRIPTION).sendKeys(project.getDescription());
+        submit();
         return this;
     }
 
