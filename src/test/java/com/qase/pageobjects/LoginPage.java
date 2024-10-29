@@ -20,7 +20,7 @@ public class LoginPage extends BasePage {
         isPageOpened();
         $("[name=email]").sendKeys(username);
         $("[name=password]").sendKeys(password);
-        $("[type=submit]").click();
+        submit();
         return this;
     }
 
