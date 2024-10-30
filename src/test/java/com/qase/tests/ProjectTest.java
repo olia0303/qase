@@ -42,4 +42,23 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened();
         assertFalse(projectsPage.isProjectExist(project.getName()));
     }
+
+    @Test(description = "Check the updated existing project")
+    public void projectShouldBeUpdated() {
+        Project project = getProject();
+        Project updateProject = getProject();
+        loginPage.openPage()
+                .isPageOpened()
+                .logIn(testData.USER, testData.PASS);
+        projectsPage.isPageOpened()
+                .createNewProject(project)
+                .openPage()
+                .isPageOpened()
+                .openProjectByName(project.getName())
+                .openProjectSettings();
+        projectSettingPage.isPageOpened().updateProjectSettings(updateProject);
+        assertEquals(projectSettingPage.getProjectName(), updateProject.getName());
+        assertEquals(projectSettingPage.getProjectCode(), updateProject.getCode());
+        assertEquals(projectSettingPage.getProjectDescription(), updateProject.getDescription());
+    }
 }

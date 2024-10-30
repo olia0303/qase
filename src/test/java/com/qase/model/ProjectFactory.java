@@ -11,7 +11,7 @@ public class ProjectFactory {
         return Project.builder()
                 .name(new TestData().PROJECT_NAME)
                 .code(new TestData().PROJECT_CODE)
-                .description("bbbggggg")
+                .description(new TestData().PROJECT_DESCRIPTION)
                 .build();
     }
 }
