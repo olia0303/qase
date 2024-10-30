@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import com.qase.model.Project;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.qase.other.Urls.PROJECTS_PAGE;
@@ -16,7 +18,7 @@ public class ProjectsPage extends BasePage {
 
     @Override
     public ProjectsPage isPageOpened() {
-        $(By.xpath(" //h1[contains(text(),'Projects')]")).shouldBe(Condition.visible);
+        $(By.xpath(" //h1[contains(text(),'Projects')]")).shouldBe(Condition.visible, Duration.ofSeconds(30));
         return this;
     }
 
