@@ -1,12 +1,12 @@
 package com.qase.pageobjects;
 
 import com.qase.model.Suite;
-import org.openqa.selenium.By;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class SuitesPage extends BasePage {
 
@@ -14,17 +14,19 @@ public class SuitesPage extends BasePage {
     private final String SUITE_NAME = "#title";
     private final String SUITE_DESCRIPTION = "#description";
     private final String SUITE_PRECONDITIONS = "#preconditions";
+    private final String SUITES_PAGE = "//span[contains(text(),'Suites')]";
+    private final String EDIT_SUITE_BUTTON = "//button[@aria-label='Edit suite']";
+    private final String MESSAGE = "//div[contains(text(),'Looks like you don’t have any suites and cases yet.')]";
 
     @Override
     public SuitesPage isPageOpened() {
-        $(By.xpath("//span[contains(text(),'Suites')]"))
-                .shouldBe(visible);
+        $x(SUITES_PAGE).shouldBe(visible);
         return this;
     }
 
     public SuitesPage createNewSuite(Suite suite) {
         loadPage();
-        $(By.xpath(CREATE_NEW_SUITE_BUTTON)).click();
+        $x(CREATE_NEW_SUITE_BUTTON).click();
         $(SUITE_NAME).sendKeys(suite.getSuiteName());
         $(SUITE_DESCRIPTION).sendKeys(suite.getDescription());
         $(SUITE_PRECONDITIONS).sendKeys(suite.getPreconditions());
@@ -33,7 +35,7 @@ public class SuitesPage extends BasePage {
     }
 
     public SuitesPage openEditSuitePage() {
-        $(By.xpath("//button[@aria-label='Edit suite']")).click();
+        $x(EDIT_SUITE_BUTTON).click();
         return this;
     }
 
@@ -50,7 +52,6 @@ public class SuitesPage extends BasePage {
     }
 
     public void loadPage() {
-        $(By.xpath("//div[contains(text(),'Looks" +
-                " like you don’t have any suites and cases yet')]")).shouldBe(visible, Duration.ofSeconds(30));
+        $x(MESSAGE).shouldBe(visible, Duration.ofSeconds(30));
     }
 }

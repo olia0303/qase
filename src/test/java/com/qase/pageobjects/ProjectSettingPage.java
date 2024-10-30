@@ -2,15 +2,17 @@ package com.qase.pageobjects;
 
 import com.codeborne.selenide.Condition;
 import com.qase.model.Project;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ProjectSettingPage extends BasePage {
 
+    private final String PROJECT_SETTING_PAGE = "//h1[contains(text(),'Project settings')]";
+
     @Override
     public ProjectSettingPage isPageOpened() {
-        $(By.xpath("//h1[contains(text(),'Project settings')]")).shouldBe(Condition.visible);
+        $x(PROJECT_SETTING_PAGE).shouldBe(Condition.visible);
         return this;
     }
 
