@@ -56,7 +56,8 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened()
                 .openProjectByName(project.getName())
                 .openProjectSettings();
-        projectSettingPage.isPageOpened().updateProjectSettings(updateProject);
+        projectSettingPage.isPageOpened()
+                .updateProjectSettings(updateProject);
         assertEquals(projectSettingPage.getProjectName(), updateProject.getName());
         assertEquals(projectSettingPage.getProjectCode(), updateProject.getCode());
         assertEquals(projectSettingPage.getProjectDescription(), updateProject.getDescription());

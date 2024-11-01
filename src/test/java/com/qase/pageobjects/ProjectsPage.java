@@ -7,24 +7,26 @@ import com.qase.model.Project;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.qase.other.Urls.PROJECTS_PAGE_URL;
+import static com.qase.other.Urls.PROJECT_REPOSITORY_URL;
 
 public class ProjectsPage extends BasePage {
 
     private final String FIELD_XPATH = "//a[contains(text(),\"%s\")]/following::td[5]//span";
     private final String CREATE_BUTTON = "#createButton";
     private final String PROJECTS_PAGE = "//h1[contains(text(),'Projects')]";
-    private final String SETTINGS = "//a[contains(text(),'Settings')]";
-    private final String REMOVE_BUTTON = "//button[contains(text(),'Remove')]";
+    private final String SETTINGS = "//div[@data-testid='settings']";
+    private final String REMOVE_BUTTON = "//div[@data-testid='remove']";
     private final String DELETE_PROJECT = "//span[contains(text(),'Delete project')]";
 
     @Override
     public ProjectsPage isPageOpened() {
-        $x(PROJECTS_PAGE).shouldBe(Condition.visible, Duration.ofSeconds(30));
+        $x(PROJECTS_PAGE).shouldBe(Condition.visible, Duration.ofSeconds(50));
         return this;
     }
 
     public ProjectsPage openPage() {
-        open(PROJECTS_PAGE);
+        open(PROJECTS_PAGE_URL);
         return this;
     }
 
@@ -59,5 +61,10 @@ public class ProjectsPage extends BasePage {
 
     public boolean isProjectExist(String projectName) {
         return $x(String.format(FIELD_XPATH, projectName)).isDisplayed();
+    }
+
+    public ProjectsPage openProjectRepository(String code) {
+        open(PROJECT_REPOSITORY_URL + code);
+        return this;
     }
 }
