@@ -60,9 +60,8 @@ public class SuiteTest extends BaseTest {
         suitesPage.createNewSuite(suite)
                 .isPageOpened();
         assertTrue(suitesPage.isSuiteExist(suite.getSuiteName()));
-        suitesPage.deleteSuite()
-                .isPageOpened();
-        assertFalse(projectsPage.isProjectExist(project.getName()));
-
+        suitesPage.deleteSuite();
+        projectsPage.openProjectRepository(project.getCode());
+        assertFalse(suitesPage.isSuiteExist(suite.getSuiteName()));
     }
 }

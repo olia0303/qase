@@ -13,6 +13,7 @@ public class TestData {
     public final String SUITE_NAME;
     public final String SUITE_DESCRIPTION;
     public final String SUITE_PRECONDITIONS;
+    public final String TEST_CASE_TITLE;
 
     public TestData() {
         USER = new PropertyManager().get("email");
@@ -24,5 +25,6 @@ public class TestData {
         SUITE_NAME = generator.name().firstName();
         SUITE_DESCRIPTION = generator.book().publisher();
         SUITE_PRECONDITIONS = generator.book().title();
+        TEST_CASE_TITLE = generator.name().title();
     }
 }

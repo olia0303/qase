@@ -2,10 +2,7 @@ package com.qase.tests;
 
 import com.codeborne.selenide.Selenide;
 import com.qase.other.TestData;
-import com.qase.pageobjects.LoginPage;
-import com.qase.pageobjects.ProjectSettingPage;
-import com.qase.pageobjects.ProjectsPage;
-import com.qase.pageobjects.SuitesPage;
+import com.qase.pageobjects.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -15,6 +12,7 @@ public class BaseTest {
     public ProjectsPage projectsPage;
     public ProjectSettingPage projectSettingPage;
     public SuitesPage suitesPage;
+    public TestCasePage testCasePage;
 
     @BeforeMethod(description = "Opening browser")
     public void startBrowser() {
@@ -23,6 +21,7 @@ public class BaseTest {
         projectsPage = new ProjectsPage();
         projectSettingPage = new ProjectSettingPage();
         suitesPage = new SuitesPage();
+        testCasePage = new TestCasePage();
     }
 
     @AfterMethod(description = "Closing browser", alwaysRun = true)
