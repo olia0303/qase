@@ -18,6 +18,9 @@ public class TestCasePage extends BasePage {
     private final String EDIT_TEST_CASE_PAGE = "//h1[text()='Edit test case']";
     private final String SAVE_CASE_BUTTON = "#save-case";
     private final String TEST_CASE_NAME = "#title";
+    private final String DELETE_BUTTON = "//span[normalize-space(text())='Delete']";
+    private final String DELETE_TEST_CASE = "//span[text()='Delete']";
+    private final String TEST_CASE_TITLE = "//div[text()='%s']";
 
     @Override
     public TestCasePage isPageOpened() {
@@ -25,10 +28,24 @@ public class TestCasePage extends BasePage {
         return this;
     }
 
-    public TestCasePage createTestCase(TestCase testCase) {
+    public TestCasePage createNewTestCase() {
         $(CREATE_CASE_BUTTON).shouldBe(visible, Duration.ofSeconds(40));
         $(CREATE_CASE_BUTTON).click();
+        return this;
+    }
+
+    public TestCasePage fillTestCaseName(TestCase testCase) {
         $(TEST_CASE_NAME).sendKeys(testCase.getTitle());
+        return this;
+    }
+
+    public TestCasePage editTestCaseName(TestCase testCase) {
+        $(TEST_CASE_NAME).clear();
+        $(TEST_CASE_NAME).sendKeys(testCase.getTitle());
+        return this;
+    }
+
+    public TestCasePage fillRequiredField(TestCase testCase) {
         new QaseSelect("Status").selectOption(testCase.getStatus());
         new QaseSelect("Severity").selectOption(testCase.getSeverity());
         new QaseSelect("Priority").selectOption(testCase.getPriority());
@@ -49,6 +66,15 @@ public class TestCasePage extends BasePage {
     public void editTestCase() {
         $x(EDIT_BUTTON).click();
         $x(EDIT_TEST_CASE_PAGE).shouldBe(Condition.visible);
+    }
+
+    public void deleteTestCase() {
+        $x(DELETE_BUTTON).click();
+        $x(DELETE_TEST_CASE).click();
+    }
+
+    public boolean isTestCaseExist(String testCaseName) {
+        return $x(String.format(TEST_CASE_TITLE, testCaseName)).isDisplayed();
     }
 
     public String getTestCaseName() {

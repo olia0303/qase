@@ -16,4 +16,18 @@ public class TestCaseFactory {
                 .automationStatus("Manual")
                 .build();
     }
+
+    public static TestCase getUpdatedTestCase() {
+        return TestCase.builder()
+                .title(new TestData().TEST_CASE_TITLE)
+                .status("Actual")
+                .severity("Critical")
+                .priority("Medium")
+                .type("Smoke")
+                .layer("API")
+                .isFlaky("Yes")
+                .behavior("Negative")
+                .automationStatus("Automated")
+                .build();
+    }
 }
