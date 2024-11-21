@@ -24,6 +24,8 @@
         <allure.testng.version>2.29.0</allure.testng.version>
         <java.faker.version>1.0.2</java.faker.version>
         <allure.java.commons.version>2.29.0</allure.java.commons.version>
+        <rest.assured.version>5.5.0</rest.assured.version>
+        <gson.version>2.11.0</gson.version>
         <suiteXmlFile>src/test/resources/testng-properties.xml</suiteXmlFile>
     </properties>
     <build>
@@ -131,6 +133,17 @@
             <artifactId>javafaker</artifactId>
             <version>${java.faker.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest.assured.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -17,7 +17,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
+                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
@@ -25,6 +25,7 @@ public class SuiteTest extends BaseTest {
         assertEquals(suitesPage.getSuiteName(), suite.getSuiteName());
         assertEquals(suitesPage.getSuiteDescription(), suite.getDescription());
         assertEquals(suitesPage.getSuitePreconditions(), suite.getPreconditions());
+        projectsPage.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the updated existing suite")
@@ -36,7 +37,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
+                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
@@ -45,6 +46,7 @@ public class SuiteTest extends BaseTest {
         assertEquals(suitesPage.getSuiteName(), updateDSuite.getSuiteName());
         assertEquals(suitesPage.getSuiteDescription(), updateDSuite.getDescription());
         assertEquals(suitesPage.getSuitePreconditions(), updateDSuite.getPreconditions());
+        projectsPage.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the deletion of the existing suite")
@@ -55,7 +57,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
+                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened();
@@ -63,5 +65,6 @@ public class SuiteTest extends BaseTest {
         suitesPage.deleteSuite();
         projectsPage.openProjectRepository(project.getCode());
         assertFalse(suitesPage.isSuiteExist(suite.getSuiteName()));
+        projectsPage.deleteProjectViaApi(project.getCode());
     }
 }

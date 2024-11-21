@@ -1,5 +1,8 @@
 package com.qase.pageobjects;
 
+import com.qase.api.APIUtilsExtended;
+import com.qase.api.RestApiUtils;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.testng.Assert.assertEquals;
@@ -24,4 +27,7 @@ public abstract class BasePage {
     public void validateFieldValue(String fieldName, String value) {
         assertEquals(getDisplayValue(fieldName), value);
     }
+
+    RestApiUtils restApiUtils = new RestApiUtils();
+    APIUtilsExtended apiUtilsExtended = new APIUtilsExtended(restApiUtils);
 }

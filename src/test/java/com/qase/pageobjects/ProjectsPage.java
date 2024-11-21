@@ -2,6 +2,7 @@ package com.qase.pageobjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.qase.api.ProjectAdapter;
 import com.qase.model.Project;
 
 import java.time.Duration;
@@ -65,6 +66,18 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage openProjectRepository(String code) {
         open(PROJECT_REPOSITORY_URL + code);
+        return this;
+    }
+
+    public ProjectsPage createProjectViaApi(Project project) {
+        ProjectAdapter projectAdapter = new ProjectAdapter(apiUtilsExtended);
+        projectAdapter.post(project);
+        return this;
+    }
+
+    public ProjectsPage deleteProjectViaApi(String code) {
+        ProjectAdapter projectAdapter = new ProjectAdapter(apiUtilsExtended);
+        projectAdapter.delete(code);
         return this;
     }
 }
