@@ -2,6 +2,9 @@ package com.qase.tests;
 
 import com.qase.model.Project;
 import com.qase.model.TestCase;
+import com.qase.pageobjects.ProjectsPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +13,19 @@ import static com.qase.model.TestCaseFactory.getTestCase;
 import static org.testng.Assert.*;
 
 public class TestCaseTest extends BaseTest {
+    private Project project;
+    ProjectsPage projectsPage = new ProjectsPage();
+
+    @BeforeClass
+    public void setProjectViaApi() {
+        project = getProject();
+        projectsPage.createProjectViaApi(project);
+    }
+
+    @AfterClass
+    public void deleteProject() {
+        projectsPage.deleteProjectViaApi(project.getCode());
+    }
 
     @DataProvider(name = "Get test cases")
     public Object[][] getTestCases() {
@@ -31,14 +47,12 @@ public class TestCaseTest extends BaseTest {
     @Test(dataProvider = "Get test cases", description = "Check the added test case with different data")
     public void testCaseShouldBeCreated(String status, String severity, String priority, String type,
                                         String layer, String isFlaky, String behavior, String autoStatus) {
-        Project project = getProject();
         TestCase testCase = getTestCase(status, severity, priority, type, layer, isFlaky, behavior, autoStatus);
 
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         testCasePage.createNewTestCase()
                 .fillTestCaseName(testCase)
@@ -48,12 +62,10 @@ public class TestCaseTest extends BaseTest {
                 .editTestCase();
         testCasePage.validateDetails(testCase);
         assertEquals(testCasePage.getTestCaseName(), testCase.getTitle());
-        projectsPage.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the updated test case with valid data")
     public void testCaseShouldBeUpdated() {
-        Project project = getProject();
         TestCase testCase = getTestCase("Actual", "Major", "Medium",
                 "Usability", "API", "Yes", "Destructive", "Automated");
         TestCase uodateTestCase = getTestCase("Deprecated", "Blocker", "Low",
@@ -62,7 +74,6 @@ public class TestCaseTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         testCasePage.createNewTestCase()
                 .fillTestCaseName(testCase)
@@ -74,19 +85,16 @@ public class TestCaseTest extends BaseTest {
                 .fillRequiredField(uodateTestCase);
         testCasePage.validateDetails(uodateTestCase);
         assertEquals(testCasePage.getTestCaseName(), uodateTestCase.getTitle());
-        projectsPage.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the deletion of the existing suite")
     public void testCaseShouldBeDeleted() {
-        Project project = getProject();
         TestCase testCase = getTestCase("Actual", "Major", "Medium",
                 "Usability", "API", "Yes", "Destructive", "Automated");
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createProjectViaApi(project)
                 .openProjectRepository(project.getCode());
         testCasePage.createNewTestCase()
                 .fillTestCaseName(testCase)
@@ -97,6 +105,5 @@ public class TestCaseTest extends BaseTest {
                 .deleteTestCase();
         projectsPage.openProjectRepository(project.getCode());
         assertFalse(testCasePage.isTestCaseExist(testCase.getTitle()));
-        projectsPage.deleteProjectViaApi(project.getCode());
     }
 }
