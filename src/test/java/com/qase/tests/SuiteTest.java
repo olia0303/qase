@@ -2,6 +2,9 @@ package com.qase.tests;
 
 import com.qase.model.Project;
 import com.qase.model.Suite;
+import com.qase.pageobjects.ProjectsPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.qase.model.ProjectFactory.getProject;
@@ -9,16 +12,29 @@ import static com.qase.model.SuiteFactory.getSuite;
 import static org.testng.Assert.*;
 
 public class SuiteTest extends BaseTest {
+
+    private Project project;
+    ProjectsPage projectsPage = new ProjectsPage();
+
+    @BeforeClass
+    public void setProjectViaApi() {
+        project = getProject();
+        projectsPage.createProjectViaApi(project);
+    }
+
+    @AfterClass
+    public void deleteProject() {
+        projectsPage.deleteProjectViaApi(project.getCode());
+    }
+
     @Test(description = "Check the added suite with valid data")
     public void suiteShouldBeCreated() {
-        Project project = getProject();
         Suite suite = getSuite();
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
-                .openProjectRepository(project.getCode());
+                    .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
                 .openEditSuitePage();
@@ -29,15 +45,13 @@ public class SuiteTest extends BaseTest {
 
     @Test(description = "Check the updated existing suite")
     public void suiteShouldBeUpdated() {
-        Project project = getProject();
         Suite suite = getSuite();
         Suite updateDSuite = getSuite();
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
-                .openProjectRepository(project.getCode());
+                    .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
                 .openEditSuitePage()
@@ -49,14 +63,12 @@ public class SuiteTest extends BaseTest {
 
     @Test(description = "Check the deletion of the existing suite")
     public void suiteShouldBeDeleted() {
-        Project project = getProject();
         Suite suite = getSuite();
         loginPage.openPage()
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                .createNewProject(project)
-                .openProjectRepository(project.getCode());
+                    .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened();
         assertTrue(suitesPage.isSuiteExist(suite.getSuiteName()));
