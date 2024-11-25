@@ -24,7 +24,17 @@ public class APIUtilsExtended {
     public <T> String delete(String url, String code) {
         apiUtils
                 .deleteRequest(url, code);
-
         return url;
+    }
+
+    public <T> String get(String url, String code) {
+        apiUtils
+                .getRequest(url, code);
+        return url;
+    }
+
+    public <T> String getMessage(String url, String code) {
+        return apiUtils
+                .getErrorMessage(url, code);
     }
 }

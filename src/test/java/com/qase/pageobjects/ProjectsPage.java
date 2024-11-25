@@ -2,14 +2,12 @@ package com.qase.pageobjects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.qase.api.ProjectAdapter;
 import com.qase.model.Project;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.qase.other.Urls.PROJECTS_PAGE_URL;
-import static com.qase.other.Urls.PROJECT_REPOSITORY_URL;
+import static com.qase.other.Urls.*;
 
 public class ProjectsPage extends BasePage {
 
@@ -70,14 +68,22 @@ public class ProjectsPage extends BasePage {
     }
 
     public ProjectsPage createProjectViaApi(Project project) {
-        ProjectAdapter projectAdapter = new ProjectAdapter(apiUtilsExtended);
-        projectAdapter.post(project);
+        apiUtilsExtended.post(PROJECT_API_URL, project);
         return this;
     }
 
     public ProjectsPage deleteProjectViaApi(String code) {
-        ProjectAdapter projectAdapter = new ProjectAdapter(apiUtilsExtended);
-        projectAdapter.delete(code);
+        apiUtilsExtended.delete(PROJECT_API_URL, code);
         return this;
+    }
+
+    public String getProjectById(String code) {
+        apiUtilsExtended.get(PROJECT_API_URL, code);
+        return code;
+    }
+
+    public String getErrorMessageById(String code) {
+        String message = apiUtilsExtended.getMessage(PROJECT_API_URL, code);
+        return message;
     }
 }
