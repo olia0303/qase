@@ -33,8 +33,25 @@ public class APIUtilsExtended {
         return url;
     }
 
+    public <T> String getId(String url, String code, int id) {
+        apiUtils
+                .getRequestById(url, code, id);
+        return url;
+    }
+
     public <T> String getMessage(String url, String code) {
         return apiUtils
                 .getErrorMessage(url, code);
+    }
+
+    public <T> String deleteById(String url, String code, int id) {
+        apiUtils
+                .deleteRequestById(url, code, id);
+        return url;
+    }
+
+    public String getMessageById(String url, String code, int id) {
+        return apiUtils
+                .getErrorMessageById(url, code, id);
     }
 }

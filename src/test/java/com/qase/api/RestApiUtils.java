@@ -11,12 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class RestApiUtils {
 
-    public Response postRequest(String requestURL, String request) {
-        return
-                postRequest(requestURL, request, ContentType.JSON);
-    }
-
-    private Response postRequest(String requestURL, String request, ContentType contentType) {
+    Response postRequest(String requestURL, String request) {
 
         ValidatableResponse resp =
                 given()
@@ -29,19 +24,10 @@ public class RestApiUtils {
                         .then()
                         .log().all()
                         .statusCode(200);
-        if (contentType == ContentType.JSON) {
-            return resp.contentType(ContentType.JSON).extract().response();
-        } else {
-            return null;
-        }
+        return resp.contentType(ContentType.JSON).extract().response();
     }
 
-    public Response deleteRequest(String requestURL, String code) {
-        return
-                deleteRequest(requestURL, code, ContentType.JSON);
-    }
-
-    private Response deleteRequest(String requestURL, String code, ContentType contentType) {
+    Response deleteRequest(String requestURL, String code) {
         ValidatableResponse resp =
                 given()
                         .header("Token", new PropertyManager().get("token"))
@@ -52,19 +38,10 @@ public class RestApiUtils {
                         .then()
                         .log().all()
                         .statusCode(200);
-        if (contentType == ContentType.JSON) {
-            return resp.contentType(ContentType.JSON).extract().response();
-        } else {
-            return null;
-        }
+        return resp.contentType(ContentType.JSON).extract().response();
     }
 
-    public Response getRequest(String requestURL, String code) {
-        return
-                getRequest(requestURL, code, ContentType.JSON);
-    }
-
-    private Response getRequest(String requestURL, String code, ContentType contentType) {
+    Response getRequest(String requestURL, String code) {
         ValidatableResponse resp =
                 given()
                         .header("Token", new PropertyManager().get("token"))
@@ -75,14 +52,24 @@ public class RestApiUtils {
                         .then()
                         .log().all()
                         .statusCode(200);
-        if (contentType == ContentType.JSON) {
-            return resp.contentType(ContentType.JSON).extract().response();
-        } else {
-            return null;
-        }
+        return resp.contentType(ContentType.JSON).extract().response();
     }
 
-    public String getErrorMessage(String requestURL, String code, ContentType contentType) {
+    public Response getRequestById(String requestURL, String code, int id) {
+        ValidatableResponse resp =
+                given()
+                        .header("Token", new PropertyManager().get("token"))
+                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .log().ifValidationFails()
+                        .when()
+                        .get(requestURL + "/" + code + "/" + id)
+                        .then()
+                        .log().all()
+                        .statusCode(200);
+        return resp.contentType(ContentType.JSON).extract().response();
+    }
+
+    public String getErrorMessage(String requestURL, String code) {
         String errorMessage =
                 given()
                         .header("Token", new PropertyManager().get("token"))
@@ -96,8 +83,31 @@ public class RestApiUtils {
         return errorMessage;
     }
 
-    public String getErrorMessage(String requestURL, String code) {
-        return
-                getErrorMessage(requestURL, code, ContentType.JSON);
+    Response deleteRequestById(String requestURL, String code, int id) {
+        ValidatableResponse resp =
+                given()
+                        .header("Token", new PropertyManager().get("token"))
+                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .log().ifValidationFails()
+                        .when()
+                        .delete(requestURL + "/" + code + "/" + id)
+                        .then()
+                        .log().all()
+                        .statusCode(200);
+        return resp.contentType(ContentType.JSON).extract().response();
+    }
+
+    public String getErrorMessageById(String requestURL, String code, int id) {
+        String errorMessage =
+                given()
+                        .header("Token", new PropertyManager().get("token"))
+                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .log().ifValidationFails()
+                        .when()
+                        .get(requestURL + "/" + code + "/" + id)
+                        .then()
+                        .body("status", equalTo(false))
+                        .extract().path("errorMessage");
+        return errorMessage;
     }
 }

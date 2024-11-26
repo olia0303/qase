@@ -19,12 +19,12 @@ public class SuiteTest extends BaseTest {
     @BeforeClass
     public void setProjectViaApi() {
         project = getProject();
-        projectsPage.createProjectViaApi(project);
+        mainAdapter.createProjectViaApi(project);
     }
 
     @AfterClass
     public void deleteProject() {
-        projectsPage.deleteProjectViaApi(project.getCode());
+        mainAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the added suite with valid data")

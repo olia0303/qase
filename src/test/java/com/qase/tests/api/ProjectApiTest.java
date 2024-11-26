@@ -10,20 +10,20 @@ public class ProjectApiTest extends BaseApiTest {
     @Test(description = "Check the added new project via API")
     public void projectShouldBeCreatedViaApi() {
         Project project = getProject();
-        projectsPage.createProjectViaApi(project);
-        String code = projectsPage.getProjectById(project.getCode());
+        mainAdapter.createProjectViaApi(project);
+        String code = mainAdapter.getProjectById(project.getCode());
         assertEquals(code, project.getCode());
-        projectsPage.deleteProjectViaApi(project.getCode());
+        mainAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the deletion of the existing project via API")
     public void projectShouldBeDeletedViaApi() {
         Project project = getProject();
-        projectsPage.createProjectViaApi(project);
-        String code = projectsPage.getProjectById(project.getCode());
+        mainAdapter.createProjectViaApi(project);
+        String code = mainAdapter.getProjectById(project.getCode());
         assertEquals(code, project.getCode());
-        projectsPage.deleteProjectViaApi(project.getCode());
-        String message = projectsPage.getErrorMessageById(code);
+        mainAdapter.deleteProjectViaApi(project.getCode());
+        String message = mainAdapter.getProjectErrorMessageById(code);
         assertEquals(message, "Project not found");
     }
 }

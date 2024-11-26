@@ -19,12 +19,12 @@ public class TestCaseTest extends BaseTest {
     @BeforeClass
     public void setProjectViaApi() {
         project = getProject();
-        projectsPage.createProjectViaApi(project);
+        mainAdapter.createProjectViaApi(project);
     }
 
     @AfterClass
     public void deleteProject() {
-        projectsPage.deleteProjectViaApi(project.getCode());
+        mainAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @DataProvider(name = "Get test cases")

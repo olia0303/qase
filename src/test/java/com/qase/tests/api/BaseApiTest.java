@@ -1,13 +1,17 @@
 package com.qase.tests.api;
 
-import com.qase.pageobjects.ProjectsPage;
+import com.qase.api.APIUtilsExtended;
+import com.qase.api.MainAdapter;
+import com.qase.api.RestApiUtils;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseApiTest {
-    public ProjectsPage projectsPage;
+    public APIUtilsExtended apiUtilsExtended;
+    public MainAdapter mainAdapter;
 
     @BeforeMethod(description = "Set up test data")
     public void start() {
-        projectsPage = new ProjectsPage();
+        apiUtilsExtended = new APIUtilsExtended(new RestApiUtils());
+        mainAdapter = new MainAdapter(apiUtilsExtended);
     }
 }

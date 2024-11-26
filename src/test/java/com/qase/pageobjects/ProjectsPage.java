@@ -7,7 +7,8 @@ import com.qase.model.Project;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.qase.other.Urls.*;
+import static com.qase.other.Urls.PROJECTS_PAGE_URL;
+import static com.qase.other.Urls.PROJECT_REPOSITORY_URL;
 
 public class ProjectsPage extends BasePage {
 
@@ -65,25 +66,5 @@ public class ProjectsPage extends BasePage {
     public ProjectsPage openProjectRepository(String code) {
         open(PROJECT_REPOSITORY_URL + code);
         return this;
-    }
-
-    public ProjectsPage createProjectViaApi(Project project) {
-        apiUtilsExtended.post(PROJECT_API_URL, project);
-        return this;
-    }
-
-    public ProjectsPage deleteProjectViaApi(String code) {
-        apiUtilsExtended.delete(PROJECT_API_URL, code);
-        return this;
-    }
-
-    public String getProjectById(String code) {
-        apiUtilsExtended.get(PROJECT_API_URL, code);
-        return code;
-    }
-
-    public String getErrorMessageById(String code) {
-        String message = apiUtilsExtended.getMessage(PROJECT_API_URL, code);
-        return message;
     }
 }
