@@ -2,9 +2,9 @@ package com.qase.api;
 
 import com.qase.model.Project;
 import com.qase.model.Suite;
+import com.qase.model.TestCase;
 
-import static com.qase.other.Urls.PROJECT_API_URL;
-import static com.qase.other.Urls.SUITE_API_URL;
+import static com.qase.other.Urls.*;
 
 public class MainAdapter {
     private final APIUtilsExtended apiUtilsExtended;
@@ -50,6 +50,26 @@ public class MainAdapter {
 
     public String getSuiteErrorMessageById(String code, int suiteId) {
         String message = apiUtilsExtended.getMessageById(SUITE_API_URL, code, suiteId);
+        return message;
+    }
+
+    public MainAdapter createTestCaseViaApi(TestCase testCase, String code) {
+        apiUtilsExtended.post(CASE_API_URL + "/" + code, testCase);
+        return this;
+    }
+
+    public int getSpecificTestCase(String code, int caseId) {
+        apiUtilsExtended.getId(CASE_API_URL, code, caseId);
+        return caseId;
+    }
+
+    public MainAdapter deleteTestCaseViaApi(String code, int caseId) {
+        apiUtilsExtended.deleteById(CASE_API_URL, code, caseId);
+        return this;
+    }
+
+    public String getTestCaseErrorMessageById(String code, int caseId) {
+        String message = apiUtilsExtended.getMessageById(CASE_API_URL, code, caseId);
         return message;
     }
 }
