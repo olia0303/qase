@@ -19,12 +19,12 @@ public class SuiteTest extends BaseTest {
     @BeforeClass
     public void setProjectViaApi() {
         project = getProject();
-        projectsPage.createProjectViaApi(project);
+        mainAdapter.createProjectViaApi(project);
     }
 
     @AfterClass
     public void deleteProject() {
-        projectsPage.deleteProjectViaApi(project.getCode());
+        mainAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the added suite with valid data")
@@ -34,7 +34,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                    .openProjectRepository(project.getCode());
+                .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
                 .openEditSuitePage();
@@ -51,7 +51,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                    .openProjectRepository(project.getCode());
+                .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened()
                 .openEditSuitePage()
@@ -68,7 +68,7 @@ public class SuiteTest extends BaseTest {
                 .isPageOpened()
                 .logIn(testData.USER, testData.PASS);
         projectsPage.isPageOpened()
-                    .openProjectRepository(project.getCode());
+                .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
                 .isPageOpened();
         assertTrue(suitesPage.isSuiteExist(suite.getSuiteName()));
