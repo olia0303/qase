@@ -110,4 +110,18 @@ public class RestApiUtils {
                         .extract().path("errorMessage");
         return errorMessage;
     }
+
+    public Response patchRequest(String requestURL, String code, int id, String request) {
+        ValidatableResponse resp =
+        given()
+                .header("Token", new PropertyManager().get("token"))
+                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .body(request)
+                .when()
+                .patch(requestURL + "/" + code + "/" + id)
+                .then()
+                .log().ifError()
+                .statusCode(200);
+        return resp.contentType(ContentType.JSON).extract().response();
+    }
 }

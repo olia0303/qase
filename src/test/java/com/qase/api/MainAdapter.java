@@ -72,4 +72,14 @@ public class MainAdapter {
         String message = apiUtilsExtended.getMessageById(CASE_API_URL, code, caseId);
         return message;
     }
+
+    public Suite updatedSuiteViaApi(String code, int suiteId, Suite suite) {
+        apiUtilsExtended.patch(SUITE_API_URL, code, suiteId, suite);
+        return suite;
+    }
+
+    public TestCase updatedTestCaseViaApi(String code, int caseId, TestCase testCase) {
+        apiUtilsExtended.patch(CASE_API_URL, code, caseId, testCase);
+        return testCase;
+    }
 }

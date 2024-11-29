@@ -21,12 +21,13 @@ public class TestCaseFactory {
     public static TestCase getTestCaseApi() {
         return TestCase.builder()
                 .caseId(1)
-                .typeApi(3)
-                .severityApi(3)
-                .priorityApi(2)
-                .statusApi(2)
-                .behaviorApi(2)
-                .automation(2)
+                .typeApi(new TestData().TEST_CASE_DATA)
+                .severityApi(new TestData().TEST_CASE_DATA)
+                .priorityApi(new TestData().TEST_CASE_DATA)
+                .statusApi(new TestData().TEST_CASE_DATA)
+                .behaviorApi(new TestData().TEST_CASE_DATA)
+                .automation(new TestData().TEST_CASE_DATA)
+                .layerApi(new TestData().TEST_CASE_DATA)
                 .title(new TestData().TEST_CASE_TITLE)
                 .build();
     }

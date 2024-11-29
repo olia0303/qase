@@ -54,4 +54,10 @@ public class APIUtilsExtended {
         return apiUtils
                 .getErrorMessageById(url, code, id);
     }
+
+    public <T> void patch(String url, String code, int objectId, T object) {
+        apiUtils
+                .patchRequest(url, code, objectId,
+                        gson.toJson(object)).toString();;
+    }
 }
