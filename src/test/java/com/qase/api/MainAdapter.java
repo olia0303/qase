@@ -8,6 +8,9 @@ import static com.qase.other.Urls.*;
 
 public class MainAdapter {
     private final APIUtilsExtended apiUtilsExtended;
+    private final String PROJECT_API_URL = BASE_API_URL + "project";
+    private final String SUITE_API_URL = BASE_API_URL + "suite";
+    private final String CASE_API_URL = BASE_API_URL + "case";
 
     public MainAdapter(APIUtilsExtended apiUtilsExtended) {
         this.apiUtilsExtended = apiUtilsExtended;
