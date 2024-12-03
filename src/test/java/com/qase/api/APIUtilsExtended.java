@@ -58,6 +58,6 @@ public class APIUtilsExtended {
     public <T> void patch(String url, String code, int objectId, T object) {
         apiUtils
                 .patchRequest(url, code, objectId,
-                        gson.toJson(object)).toString();;
+                        gson.toJson(object)).toString();
     }
 }

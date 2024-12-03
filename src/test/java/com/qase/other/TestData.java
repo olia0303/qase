@@ -27,6 +27,6 @@ public class TestData {
         SUITE_DESCRIPTION = generator.book().publisher();
         SUITE_PRECONDITIONS = generator.book().title();
         TEST_CASE_TITLE = generator.name().title();
-        TEST_CASE_DATA = generator.number().numberBetween(1,3);
+        TEST_CASE_DATA = generator.number().numberBetween(1, 3);
     }
 }

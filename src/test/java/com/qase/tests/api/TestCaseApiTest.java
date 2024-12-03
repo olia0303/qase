@@ -8,7 +8,7 @@ import static com.qase.model.ProjectFactory.getProject;
 import static com.qase.model.TestCaseFactory.getTestCaseApi;
 import static org.testng.Assert.assertEquals;
 
-public class TestCaseApiTest extends BaseApiTest{
+public class TestCaseApiTest extends BaseApiTest {
     @Test(description = "Check the added new test case via API")
     public void testCaseShouldBeCreatedViaApi() {
         Project project = getProject();

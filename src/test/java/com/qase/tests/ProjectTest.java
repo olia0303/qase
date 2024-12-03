@@ -15,6 +15,7 @@ import static org.testng.Assert.*;
 
 public class ProjectTest extends BaseTest {
     MainAdapter mainAdapter = new MainAdapter(new APIUtilsExtended(new RestApiUtils()));
+
     @Test(description = "Check the added project with valid data")
     public void projectShouldBeCreated() {
         Project project = getProject();
@@ -88,7 +89,7 @@ public class ProjectTest extends BaseTest {
                 .isPageOpened()
                 .openProjectRepository(project.getCode());
         suitesPage.createNewSuite(suite)
-                   .isPageOpened();
+                .isPageOpened();
         testCasePage.createNewTestCase()
                 .fillTestCaseName(testCase)
                 .fillRequiredField(testCase);
