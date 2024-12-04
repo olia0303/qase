@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Critical Path Test" parallel="tests">
+    <test name="Sub-suite #1">
+        <classes>
+            <class name="com.qase.tests.TestCaseTest"/>
+            <class name="com.qase.tests.LoginTest"/>
+            <class name="com.qase.tests.api.SuiteApiTest"/>
+            <class name="com.qase.tests.api.ProjectApiTest"/>
+        </classes>
+    </test> <!-- Test -->
+    <test name="Sub-suite #2" >
+        <classes>
+            <class name="com.qase.tests.ProjectTest" />
+            <class name="com.qase.tests.SuiteTest" />
+            <class name="com.qase.tests.api.TestCaseApiTest"/>
+        </classes>
+    </test>
+</suite>
