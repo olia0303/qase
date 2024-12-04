@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.qase.other.Urls.LOGIN_PAGE;
+import static com.qase.other.Urls.BASE_URL;
 
 public class LoginPage extends BasePage {
     private final By ERROR_MESSAGE = By.cssSelector("small.f75Cb_");
@@ -12,6 +12,7 @@ public class LoginPage extends BasePage {
     private final String LOGIN_PAGE_XPATH = "//h1[contains(text(),'Log in to your account')]";
     private final String USER_EMAIL = "[name=email]";
     private final String USER_PASS = "[name=password]";
+    private final String LOGIN_PAGE = BASE_URL + "/login";
 
     public LoginPage openPage() {
         open(LOGIN_PAGE);

@@ -17,4 +17,18 @@ public class TestCaseFactory {
                 .automationStatus(autoStatus)
                 .build();
     }
+
+    public static TestCase getTestCaseApi() {
+        return TestCase.builder()
+                .caseId(1)
+                .typeApi(new TestData().TEST_CASE_DATA)
+                .severityApi(new TestData().TEST_CASE_DATA)
+                .priorityApi(new TestData().TEST_CASE_DATA)
+                .statusApi(new TestData().TEST_CASE_DATA)
+                .behaviorApi(new TestData().TEST_CASE_DATA)
+                .automation(new TestData().TEST_CASE_DATA)
+                .layerApi(new TestData().TEST_CASE_DATA)
+                .title(new TestData().TEST_CASE_TITLE)
+                .build();
+    }
 }

@@ -32,4 +32,20 @@ public class SuiteApiTest extends BaseApiTest {
         assertEquals(message, "Suite not found");
         mainAdapter.deleteProjectViaApi(project.getCode());
     }
+
+    @Test(description = "Check the updated existing suite via API")
+    public void suiteShouldBeUpdatedViaApi() {
+        Project project = getProject();
+        Suite suite = getSuite();
+        Suite updateToSuite = getSuite();
+        mainAdapter.createProjectViaApi(project);
+        mainAdapter.createSuiteViaApi(suite, project.getCode());
+        int suiteId = mainAdapter.getSpecificTestSuite(project.getCode(), suite.getSuiteId());
+        Suite updateDSuite = mainAdapter.updatedSuiteViaApi(project.getCode(), suiteId, updateToSuite);
+        assertEquals(suiteId, updateDSuite.getSuiteId());
+        assertEquals(updateDSuite.getSuiteName(), updateToSuite.getSuiteName());
+        assertEquals(updateDSuite.getDescription(), updateToSuite.getDescription());
+        assertEquals(updateDSuite.getPreconditions(), updateDSuite.getPreconditions());
+        mainAdapter.deleteProjectViaApi(project.getCode());
+    }
 }

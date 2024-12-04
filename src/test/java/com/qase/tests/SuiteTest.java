@@ -1,5 +1,8 @@
 package com.qase.tests;
 
+import com.qase.api.APIUtilsExtended;
+import com.qase.api.MainAdapter;
+import com.qase.api.RestApiUtils;
 import com.qase.model.Project;
 import com.qase.model.Suite;
 import com.qase.pageobjects.ProjectsPage;
@@ -15,6 +18,7 @@ public class SuiteTest extends BaseTest {
 
     private Project project;
     ProjectsPage projectsPage = new ProjectsPage();
+    MainAdapter mainAdapter = new MainAdapter(new APIUtilsExtended(new RestApiUtils()));
 
     @BeforeClass
     public void setProjectViaApi() {

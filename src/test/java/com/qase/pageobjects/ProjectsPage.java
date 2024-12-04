@@ -7,17 +7,18 @@ import com.qase.model.Project;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.qase.other.Urls.PROJECTS_PAGE_URL;
-import static com.qase.other.Urls.PROJECT_REPOSITORY_URL;
+import static com.qase.other.Urls.BASE_URL;
 
 public class ProjectsPage extends BasePage {
 
     private final String FIELD_XPATH = "//a[contains(text(),\"%s\")]/following::td[5]//span";
-    private final String CREATE_BUTTON = "#createButton";
+    private final String CREATE_BUTTON = "//span[contains(text(),'Create new project')]";
     private final String PROJECTS_PAGE = "//h1[contains(text(),'Projects')]";
     private final String SETTINGS = "//div[@data-testid='settings']";
     private final String REMOVE_BUTTON = "//div[@data-testid='remove']";
     private final String DELETE_PROJECT = "//span[contains(text(),'Delete project')]";
+    private final String PROJECTS_PAGE_URL = BASE_URL + "/projects";
+    private final String PROJECT_REPOSITORY_URL = BASE_URL + "/project/";
 
     @Override
     public ProjectsPage isPageOpened() {
@@ -32,7 +33,7 @@ public class ProjectsPage extends BasePage {
 
     public ProjectsPage createNewProject(Project project) {
         isPageOpened();
-        $(CREATE_BUTTON).click();
+        $x(CREATE_BUTTON).click();
         $(PROJECT_NAME).sendKeys(project.getName());
         $(PROJECT_CODE).clear();
         $(PROJECT_CODE).sendKeys(project.getCode());
