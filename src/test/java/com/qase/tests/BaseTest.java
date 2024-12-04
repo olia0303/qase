@@ -1,8 +1,10 @@
 package com.qase.tests;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.qase.other.TestData;
 import com.qase.pageobjects.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -22,6 +24,14 @@ public class BaseTest {
         projectSettingPage = new ProjectSettingPage();
         suitesPage = new SuitesPage();
         testCasePage = new TestCasePage();
+        useChromeWithOptions();
+    }
+
+    public void useChromeWithOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--headless");
+        Configuration.browserCapabilities = options;
     }
 
     @AfterMethod(description = "Closing browser", alwaysRun = true)
