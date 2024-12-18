@@ -1,6 +1,7 @@
 package utils;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +28,14 @@ public class PropertyManager {
     }
 
     public String get(String propertyName) {
-        log.debug(String.format("Getting property by name %s. Value: %s", propertyName, prop.getProperty(propertyName)));
-        return prop.getProperty(propertyName);
+        String finalProperty;
+        if(StringUtils.isEmpty(System.getProperty(propertyName))) {
+            log.debug(String.format("Getting property from FILE by name %s. Value: %s", propertyName, prop.getProperty(propertyName)));
+            finalProperty = prop.getProperty(propertyName);
+        } else {
+            log.debug(String.format("Getting property from SYSTEM by name %s. Value: %s", propertyName, System.getProperty(propertyName)));
+            finalProperty = System.getProperty(propertyName);
+        }
+        return finalProperty;
     }
 }

@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BaseTest {
     public LoginPage loginPage;
     public TestData testData;
@@ -28,10 +31,15 @@ public class BaseTest {
     }
 
     public void useChromeWithOptions() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--headless");
-        Configuration.browserCapabilities = options;
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.addArguments("--headless");
+            Map<String, Object> prefs = new HashMap<String, Object>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("password_manager_enabled", false);
+            options.setExperimentalOption("prefs", prefs);
+            Configuration.browserCapabilities = options;
+
     }
 
     @AfterMethod(description = "Closing browser", alwaysRun = true)
