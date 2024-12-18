@@ -30,6 +30,6 @@ jobs:
     - name: Run Tests
       run: mvn clean test -Duser=$EMAIL -Dpassword=$PASSWORD -Dtoken=$TOKEN
       env:
-        USER: ${{ secrets.QASE_EMAIL }}
+        EMAIL: ${{ secrets.QASE_EMAIL }}
         PASSWORD: ${{ secrets.QASE_PASSWORD }}
         TOKEN: ${{ secrets.QASE_TOKEN }}
