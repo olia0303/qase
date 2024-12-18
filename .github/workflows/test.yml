@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run Tests
-      run: mvn clean test -Duser=$EMAIL -Dpassword=$PASSWORD -Dtoken=$TOKEN
+      run: mvn clean test -Demail=$EMAIL -Dpassword=$PASSWORD -Dtoken=$TOKEN
       env:
         EMAIL: ${{ secrets.QASE_EMAIL }}
         PASSWORD: ${{ secrets.QASE_PASSWORD }}
