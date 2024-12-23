@@ -27,9 +27,9 @@ public class APIUtilsExtended {
         return url;
     }
 
-    public <T> String get(String url, String code) {
+    public <T> String getByCode(String url, String code) {
         apiUtils
-                .getRequest(url, code);
+                .getRequestByCode(url, code);
         return url;
     }
 
@@ -59,5 +59,9 @@ public class APIUtilsExtended {
         apiUtils
                 .patchRequest(url, code, objectId,
                         gson.toJson(object)).toString();
+    }
+
+    public void deleteAllProjects(String url) {
+        apiUtils.deleteAllProjects(url);
     }
 }

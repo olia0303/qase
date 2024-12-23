@@ -29,7 +29,7 @@ public class PropertyManager {
 
     public String get(String propertyName) {
         String finalProperty;
-        if(StringUtils.isEmpty(System.getProperty(propertyName))) {
+        if (StringUtils.isEmpty(System.getProperty(propertyName))) {
             log.debug(String.format("Getting property from FILE by name %s. Value: %s", propertyName, prop.getProperty(propertyName)));
             finalProperty = prop.getProperty(propertyName);
         } else {
