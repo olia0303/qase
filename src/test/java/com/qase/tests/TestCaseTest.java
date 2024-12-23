@@ -40,7 +40,7 @@ public class TestCaseTest extends BaseTest {
                 {"Actual", "Major", "Medium", "Other", "API", "Yes", "Destructive", "Automated"},
                 {"Draft", "Normal", "High", "Exploratory", "Unit", "Yes", "Negative", "Automated"},
                 {"Deprecated", "Trivial", "Low", "Integration", "E2E", "No", "Positive", "Manual"},
-                {"Actual", "Major", "Low", "Regression", "API", "E2E", "No", "Positive", "Manual"},
+                {"Actual", "Major", "Low", "Regression", "API", "No", "Positive", "Manual"},
                 {"Draft", "Critical", "High", "Security", "Unit", "Yes", "Negative", "Automated"},
                 {"Actual", "Major", "Medium", "Smoke", "E2E", "Yes", "Destructive", "Automated"},
                 {"Deprecated", "Blocker", "Low", "Performance", "E2E", "No", "Positive", "Manual"},
@@ -62,8 +62,8 @@ public class TestCaseTest extends BaseTest {
                 .fillTestCaseName(testCase)
                 .fillRequiredField(testCase);
         suitesPage.isPageOpened();
-        testCasePage.openTestCase()
-                .editTestCase();
+        testCasePage.openTestCase(testCase.getTitle())
+                    .editTestCase();
         testCasePage.validateDetails(testCase);
         assertEquals(testCasePage.getTestCaseName(), testCase.getTitle());
     }
@@ -83,8 +83,8 @@ public class TestCaseTest extends BaseTest {
                 .fillTestCaseName(testCase)
                 .fillRequiredField(testCase);
         suitesPage.isPageOpened();
-        testCasePage.openTestCase()
-                .editTestCase();
+        testCasePage.openTestCase(testCase.getTitle())
+                    .editTestCase();
         testCasePage.editTestCaseName(uodateTestCase)
                 .fillRequiredField(uodateTestCase);
         testCasePage.validateDetails(uodateTestCase);
@@ -105,8 +105,8 @@ public class TestCaseTest extends BaseTest {
                 .fillRequiredField(testCase);
         suitesPage.isPageOpened();
         assertTrue(testCasePage.isTestCaseExist(testCase.getTitle()));
-        testCasePage.openTestCase()
-                .deleteTestCase();
+        testCasePage.openTestCase(testCase.getTitle())
+                    .deleteTestCase();
         projectsPage.openProjectRepository(project.getCode());
         assertFalse(testCasePage.isTestCaseExist(testCase.getTitle()));
     }
