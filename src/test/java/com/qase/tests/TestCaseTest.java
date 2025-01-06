@@ -63,7 +63,7 @@ public class TestCaseTest extends BaseTest {
                 .fillRequiredField(testCase);
         suitesPage.isPageOpened();
         testCasePage.openTestCase(testCase.getTitle())
-                    .editTestCase();
+                .editTestCase();
         testCasePage.validateDetails(testCase);
         assertEquals(testCasePage.getTestCaseName(), testCase.getTitle());
     }
@@ -84,7 +84,7 @@ public class TestCaseTest extends BaseTest {
                 .fillRequiredField(testCase);
         suitesPage.isPageOpened();
         testCasePage.openTestCase(testCase.getTitle())
-                    .editTestCase();
+                .editTestCase();
         testCasePage.editTestCaseName(uodateTestCase)
                 .fillRequiredField(uodateTestCase);
         testCasePage.validateDetails(uodateTestCase);
@@ -106,7 +106,7 @@ public class TestCaseTest extends BaseTest {
         suitesPage.isPageOpened();
         assertTrue(testCasePage.isTestCaseExist(testCase.getTitle()));
         testCasePage.openTestCase(testCase.getTitle())
-                    .deleteTestCase();
+                .deleteTestCase();
         projectsPage.openProjectRepository(project.getCode());
         assertFalse(testCasePage.isTestCaseExist(testCase.getTitle()));
     }

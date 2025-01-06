@@ -59,7 +59,7 @@ public class TestCasePage extends BasePage {
     }
 
     public TestCasePage openTestCase(String testCaseName) {
-        $x(String.format(TEST_CASE_LINK, testCaseName)).shouldBe(visible);;
+        $x(String.format(TEST_CASE_LINK, testCaseName)).shouldBe(visible);
         return this;
     }
 
