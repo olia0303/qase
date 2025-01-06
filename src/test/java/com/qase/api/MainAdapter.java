@@ -4,7 +4,7 @@ import com.qase.model.Project;
 import com.qase.model.Suite;
 import com.qase.model.TestCase;
 
-import static com.qase.other.Urls.*;
+import static com.qase.other.Urls.BASE_API_URL;
 
 public class MainAdapter {
     private final APIUtilsExtended apiUtilsExtended;
@@ -27,13 +27,17 @@ public class MainAdapter {
     }
 
     public String getProjectById(String code) {
-        apiUtilsExtended.get(PROJECT_API_URL, code);
+        apiUtilsExtended.getByCode(PROJECT_API_URL, code);
         return code;
     }
 
     public String getProjectErrorMessageById(String code) {
         String message = apiUtilsExtended.getMessage(PROJECT_API_URL, code);
         return message;
+    }
+
+    public void deleteAllProjects() {
+        apiUtilsExtended.deleteAllProjects(PROJECT_API_URL);
     }
 
     public MainAdapter createSuiteViaApi(Suite suite, String code) {

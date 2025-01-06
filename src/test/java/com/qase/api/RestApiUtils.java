@@ -6,6 +6,8 @@ import io.restassured.response.ValidatableResponse;
 import org.apache.http.protocol.HTTP;
 import utils.PropertyManager;
 
+import java.util.ArrayList;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -41,7 +43,7 @@ public class RestApiUtils {
         return resp.contentType(ContentType.JSON).extract().response();
     }
 
-    Response getRequest(String requestURL, String code) {
+    Response getRequestByCode(String requestURL, String code) {
         ValidatableResponse resp =
                 given()
                         .header("Token", new PropertyManager().get("token"))
@@ -123,5 +125,24 @@ public class RestApiUtils {
                         .log().ifError()
                         .statusCode(200);
         return resp.contentType(ContentType.JSON).extract().response();
+    }
+
+    public ArrayList<String> deleteAllProjects(String requestURL) {
+        ArrayList<String> projectsList =
+                given()
+                        .header("Token", new PropertyManager().get("token"))
+                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .log().ifValidationFails()
+                        .when()
+                        .get(requestURL + "?limit=100&offset=0")
+                        .then()
+                        .body("status", equalTo(true))
+                        .extract().path("result.entities.code");
+        if (!projectsList.isEmpty()) {
+            for (String code : projectsList) {
+                deleteRequest(requestURL, code);
+            }
+        }
+        return projectsList;
     }
 }

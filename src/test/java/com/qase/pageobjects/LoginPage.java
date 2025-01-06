@@ -33,7 +33,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getAlertMessage() {
-        String alertMessage = $(ALERT_MESSAGE).getText();
+        String alertMessage = $x(ALERT_MESSAGE).getText();
         return alertMessage;
     }
 

@@ -9,10 +9,10 @@
             <class name="com.qase.tests.api.ProjectApiTest"/>
         </classes>
     </test> <!-- Test -->
-    <test name="Sub-suite #2" >
+    <test name="Sub-suite #2">
         <classes>
-            <class name="com.qase.tests.ProjectTest" />
-            <class name="com.qase.tests.SuiteTest" />
+            <class name="com.qase.tests.ProjectTest"/>
+            <class name="com.qase.tests.SuiteTest"/>
             <class name="com.qase.tests.api.TestCaseApiTest"/>
         </classes>
     </test>

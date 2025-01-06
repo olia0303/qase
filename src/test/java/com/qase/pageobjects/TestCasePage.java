@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class TestCasePage extends BasePage {
     private final String CREATE_CASE_BUTTON = "#create-case-button";
     private final String TEST_CASE_PAGE = "//h3[contains(text(),'Test cases without suite')]";
-    private final String TEST_CASE_LINK = "//div[@data-suite-body-id]//a";
+    private final String TEST_CASE_LINK = "//div[@data-suite-body-id]//div[text()='%s']";
     private final String EDIT_BUTTON = "//span[normalize-space(text())='Edit']";
     private final String EDIT_TEST_CASE_PAGE = "//h1[text()='Edit test case']";
     private final String SAVE_CASE_BUTTON = "#save-case";
@@ -58,8 +58,8 @@ public class TestCasePage extends BasePage {
         return this;
     }
 
-    public TestCasePage openTestCase() {
-        $x(TEST_CASE_LINK).click();
+    public TestCasePage openTestCase(String testCaseName) {
+        $x(String.format(TEST_CASE_LINK, testCaseName)).shouldBe(visible);
         return this;
     }
 
