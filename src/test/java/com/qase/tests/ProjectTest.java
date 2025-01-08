@@ -1,8 +1,5 @@
 package com.qase.tests;
 
-import com.qase.api.APIUtilsExtended;
-import com.qase.api.MainAdapter;
-import com.qase.api.RestApiUtils;
 import com.qase.model.Project;
 import com.qase.model.Suite;
 import com.qase.model.TestCase;
@@ -14,7 +11,6 @@ import static com.qase.model.TestCaseFactory.getTestCase;
 import static org.testng.Assert.*;
 
 public class ProjectTest extends BaseTest {
-    MainAdapter mainAdapter = new MainAdapter(new APIUtilsExtended(new RestApiUtils()));
 
     @Test(description = "Check the added project with valid data")
     public void projectShouldBeCreated() {
@@ -93,10 +89,10 @@ public class ProjectTest extends BaseTest {
         testCasePage.createNewTestCase()
                 .fillTestCaseName(testCase)
                 .fillRequiredField(testCase);
-        String code = mainAdapter.getProjectById(project.getCode());
+        String code = projectApiAdapter.getProjectByCode(project.getCode());
         assertEquals(code, project.getCode());
-        mainAdapter.deleteProjectViaApi(project.getCode());
-        String message = mainAdapter.getProjectErrorMessageById(code);
+        projectApiAdapter.deleteProjectViaApi(project.getCode());
+        String message = projectApiAdapter.getProjectErrorMessageById(project.getCode());
         assertEquals(message, "Project not found");
     }
 }
