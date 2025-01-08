@@ -27,6 +27,7 @@ public class BaseTest {
     @BeforeSuite
     public void clean() {
         log.info("Clean old test data");
+        projectApiAdapter = new ProjectApiAdapter();
         projectApiAdapter.deleteAllProjects();
     }
 
