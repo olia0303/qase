@@ -16,6 +16,7 @@ public class TestCase {
     private String title;
     private String status;
     private String type;
+
     private String severity;
     private String priority;
     private String layer;

@@ -1,8 +1,6 @@
 package com.qase.tests;
 
-import com.qase.api.APIUtilsExtended;
-import com.qase.api.MainAdapter;
-import com.qase.api.RestApiUtils;
+import com.qase.api.ProjectApiAdapter;
 import com.qase.model.Project;
 import com.qase.model.TestCase;
 import com.qase.pageobjects.ProjectsPage;
@@ -18,17 +16,17 @@ import static org.testng.Assert.*;
 public class TestCaseTest extends BaseTest {
     private Project project;
     ProjectsPage projectsPage = new ProjectsPage();
-    MainAdapter mainAdapter = new MainAdapter(new APIUtilsExtended(new RestApiUtils()));
+    ProjectApiAdapter projectApiAdapter = new ProjectApiAdapter();
 
     @BeforeClass
     public void setProjectViaApi() {
         project = getProject();
-        mainAdapter.createProjectViaApi(project);
+        projectApiAdapter.createProjectViaApi(project);
     }
 
     @AfterClass
     public void deleteProject() {
-        mainAdapter.deleteProjectViaApi(project.getCode());
+        projectApiAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @DataProvider(name = "Get test cases")

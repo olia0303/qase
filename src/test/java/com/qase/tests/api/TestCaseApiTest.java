@@ -13,25 +13,25 @@ public class TestCaseApiTest extends BaseApiTest {
     public void testCaseShouldBeCreatedViaApi() {
         Project project = getProject();
         TestCase testCase = getTestCaseApi();
-        mainAdapter.createProjectViaApi(project);
-        mainAdapter.getProjectById(project.getCode());
-        mainAdapter.createTestCaseViaApi(testCase, project.getCode());
-        int caseId = mainAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
+        projectApiAdapter.createProjectViaApi(project);
+        projectApiAdapter.getProjectByCode(project.getCode());
+        testCaseApiAdapter.createTestCaseViaApi(testCase, project.getCode());
+        int caseId = testCaseApiAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
         assertEquals(caseId, testCase.getCaseId());
-        mainAdapter.deleteProjectViaApi(project.getCode());
+        projectApiAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the deletion of the existing test case via API")
     public void testCaseShouldBeDeletedViaApi() {
         Project project = getProject();
         TestCase testCase = getTestCaseApi();
-        mainAdapter.createProjectViaApi(project);
-        mainAdapter.createTestCaseViaApi(testCase, project.getCode());
-        int caseId = mainAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
-        mainAdapter.deleteTestCaseViaApi(project.getCode(), caseId);
-        String message = mainAdapter.getTestCaseErrorMessageById(project.getCode(), caseId);
+        projectApiAdapter.createProjectViaApi(project);
+        testCaseApiAdapter.createTestCaseViaApi(testCase, project.getCode());
+        int caseId = testCaseApiAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
+        testCaseApiAdapter.deleteTestCaseViaApi(project.getCode(), caseId);
+        String message = testCaseApiAdapter.getTestCaseErrorMessageById(project.getCode(), caseId);
         assertEquals(message, "TestCase not found");
-        mainAdapter.deleteProjectViaApi(project.getCode());
+        projectApiAdapter.deleteProjectViaApi(project.getCode());
     }
 
     @Test(description = "Check the updated existing test case via API")
@@ -39,10 +39,10 @@ public class TestCaseApiTest extends BaseApiTest {
         Project project = getProject();
         TestCase testCase = getTestCaseApi();
         TestCase updateToCase = getTestCaseApi();
-        mainAdapter.createProjectViaApi(project);
-        mainAdapter.createTestCaseViaApi(testCase, project.getCode());
-        int caseId = mainAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
-        TestCase updatedTestCase = mainAdapter.updatedTestCaseViaApi(project.getCode(), caseId, updateToCase);
+        projectApiAdapter.createProjectViaApi(project);
+        testCaseApiAdapter.createTestCaseViaApi(testCase, project.getCode());
+        int caseId = testCaseApiAdapter.getSpecificTestCase(project.getCode(), testCase.getCaseId());
+        TestCase updatedTestCase = testCaseApiAdapter.updatedTestCaseViaApi(project.getCode(), caseId, updateToCase);
         assertEquals(caseId, updatedTestCase.getCaseId());
         assertEquals(updatedTestCase.getTitle(), updateToCase.getTitle());
         assertEquals(updatedTestCase.getLayerApi(), updateToCase.getLayerApi());
@@ -51,6 +51,6 @@ public class TestCaseApiTest extends BaseApiTest {
         assertEquals(updatedTestCase.getTypeApi(), updateToCase.getTypeApi());
         assertEquals(updatedTestCase.getSeverityApi(), updateToCase.getSeverityApi());
         assertEquals(updatedTestCase.getPriorityApi(), updateToCase.getPriorityApi());
-        mainAdapter.deleteProjectViaApi(project.getCode());
+        projectApiAdapter.deleteProjectViaApi(project.getCode());
     }
 }
