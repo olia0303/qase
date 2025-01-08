@@ -1,5 +1,6 @@
 package com.qase.tests;
 
+import com.qase.api.ProjectApiAdapter;
 import com.qase.model.Project;
 import com.qase.model.Suite;
 import com.qase.pageobjects.ProjectsPage;
@@ -15,6 +16,7 @@ public class SuiteTest extends BaseTest {
 
     private Project project;
     ProjectsPage projectsPage = new ProjectsPage();
+    ProjectApiAdapter projectApiAdapter = new ProjectApiAdapter();
 
     @BeforeClass
     public void setProjectViaApi() {

@@ -2,32 +2,41 @@ package com.qase.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.restassured.http.ContentType;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.http.protocol.HTTP;
 import utils.PropertyManager;
 
 import java.util.ArrayList;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
 
 public class BaseAdapter {
+
+    private static final String BASE_URL = new PropertyManager().get("application.api.url.qase");
+    private static final String TOKEN = new PropertyManager().get("token");
 
     Gson gson = new GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
-    private static final String BASE_URL = new PropertyManager().get("application.api.url.qase");
+    RequestSpecification requestSpec = new RequestSpecBuilder()
+            .addHeader("Token", TOKEN)
+            .setContentType(HTTP.CONTENT_TYPE)
+            .setContentType(JSON)
+            .setBaseUri(BASE_URL)
+            .build();
 
     public Response post(String requestURL, String request) {
         return given()
-                .header("Token", new PropertyManager().get("token"))
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .spec(requestSpec)
                 .body(request)
                 .log().ifValidationFails()
                 .when()
-                .post(BASE_URL + requestURL)
+                .post(requestURL)
                 .then()
                 .log().all()
                 .extract().response();
@@ -35,11 +44,10 @@ public class BaseAdapter {
 
     public Response delete(String requestURL) {
         return given()
-                .header("Token", new PropertyManager().get("token"))
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .spec(requestSpec)
                 .log().ifValidationFails()
                 .when()
-                .delete(BASE_URL + requestURL)
+                .delete(requestURL)
                 .then()
                 .log().all()
                 .extract().response();
@@ -47,11 +55,10 @@ public class BaseAdapter {
 
     public Response getByCode(String requestURL) {
         return given()
-                .header("Token", new PropertyManager().get("token"))
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .spec(requestSpec)
                 .log().ifValidationFails()
                 .when()
-                .get(BASE_URL + requestURL)
+                .get(requestURL)
                 .then()
                 .log().all()
                 .extract().response();
@@ -59,11 +66,10 @@ public class BaseAdapter {
 
     public int getById(String requestURL) {
         int id = given()
-                .header("Token", new PropertyManager().get("token"))
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .spec(requestSpec)
                 .log().ifValidationFails()
                 .when()
-                .get(BASE_URL + requestURL)
+                .get(requestURL)
                 .then()
                 .log().all()
                 .extract().statusCode();
@@ -73,11 +79,10 @@ public class BaseAdapter {
     public String getErrorMessage(String requestURL) {
         String errorMessage =
                 given()
-                        .header("Token", new PropertyManager().get("token"))
-                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .spec(requestSpec)
                         .log().ifValidationFails()
                         .when()
-                        .get(BASE_URL + requestURL)
+                        .get(requestURL)
                         .then()
                         .body("status", equalTo(false))
                         .extract().path("errorMessage");
@@ -86,11 +91,10 @@ public class BaseAdapter {
 
     public void patch(String requestURL, String request) {
         given()
-                .header("Token", new PropertyManager().get("token"))
-                .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                .spec(requestSpec)
                 .body(request)
                 .when()
-                .patch(BASE_URL + requestURL)
+                .patch(requestURL)
                 .then()
                 .log().ifError().extract().response();
     }
@@ -98,11 +102,10 @@ public class BaseAdapter {
     public ArrayList<String> deleteAllProjects(String requestURL) {
         ArrayList<String> projectsList =
                 given()
-                        .header("Token", new PropertyManager().get("token"))
-                        .header(HTTP.CONTENT_TYPE, ContentType.JSON)
+                        .spec(requestSpec)
                         .log().ifValidationFails()
                         .when()
-                        .get(BASE_URL + requestURL + "?limit=100&offset=0")
+                        .get(requestURL + "?limit=100&offset=0")
                         .then()
                         .body("status", equalTo(true))
                         .extract().path("result.entities.code");

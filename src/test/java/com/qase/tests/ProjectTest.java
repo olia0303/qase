@@ -1,5 +1,6 @@
 package com.qase.tests;
 
+import com.qase.api.ProjectApiAdapter;
 import com.qase.model.Project;
 import com.qase.model.Suite;
 import com.qase.model.TestCase;
@@ -11,6 +12,7 @@ import static com.qase.model.TestCaseFactory.getTestCase;
 import static org.testng.Assert.*;
 
 public class ProjectTest extends BaseTest {
+    ProjectApiAdapter projectApiAdapter = new ProjectApiAdapter();
 
     @Test(description = "Check the added project with valid data")
     public void projectShouldBeCreated() {
