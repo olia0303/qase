@@ -43,6 +43,9 @@ public class SuiteTest extends BaseTest {
         assertEquals(suitesPage.getSuiteName(), suite.getSuiteName());
         assertEquals(suitesPage.getSuiteDescription(), suite.getDescription());
         assertEquals(suitesPage.getSuitePreconditions(), suite.getPreconditions());
+        suitesPage.save();
+        suitesPage.isPageOpened()
+                   .deleteSuite();
     }
 
     @Test(description = "Check the updated existing suite")
@@ -61,6 +64,7 @@ public class SuiteTest extends BaseTest {
         assertEquals(suitesPage.getSuiteName(), updateDSuite.getSuiteName());
         assertEquals(suitesPage.getSuiteDescription(), updateDSuite.getDescription());
         assertEquals(suitesPage.getSuitePreconditions(), updateDSuite.getPreconditions());
+        suitesPage.deleteSuite();
     }
 
     @Test(description = "Check the deletion of the existing suite")
