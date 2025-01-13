@@ -3,6 +3,7 @@ package com.qase.pageobjects;
 import com.codeborne.selenide.Condition;
 import com.qase.elements.QaseSelect;
 import com.qase.model.TestCase;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
@@ -28,23 +29,27 @@ public class TestCasePage extends BasePage {
         return this;
     }
 
+    @Step("Create new test case")
     public TestCasePage createNewTestCase() {
         $(CREATE_CASE_BUTTON).shouldBe(visible, Duration.ofSeconds(40));
         $(CREATE_CASE_BUTTON).click();
         return this;
     }
 
+    @Step("Fill test case name")
     public TestCasePage fillTestCaseName(TestCase testCase) {
         $(TEST_CASE_NAME).sendKeys(testCase.getTitle());
         return this;
     }
 
+    @Step("Edit test case name")
     public TestCasePage editTestCaseName(TestCase testCase) {
         $(TEST_CASE_NAME).clear();
         $(TEST_CASE_NAME).sendKeys(testCase.getTitle());
         return this;
     }
 
+    @Step("Fill required fields for test case")
     public TestCasePage fillRequiredField(TestCase testCase) {
         new QaseSelect("Status").selectOption(testCase.getStatus());
         new QaseSelect("Severity").selectOption(testCase.getSeverity());
@@ -58,16 +63,19 @@ public class TestCasePage extends BasePage {
         return this;
     }
 
+    @Step("Open test case")
     public TestCasePage openTestCase(String testCaseName) {
         $x(String.format(TEST_CASE_LINK, testCaseName)).shouldBe(visible);
         return this;
     }
 
+    @Step("Edit test case")
     public void editTestCase() {
         $x(EDIT_BUTTON).click();
         $x(EDIT_TEST_CASE_PAGE).shouldBe(Condition.visible);
     }
 
+    @Step("Delete test case")
     public void deleteTestCase() {
         $x(DELETE_BUTTON).click();
         $x(DELETE_TEST_CASE).click();
@@ -81,6 +89,7 @@ public class TestCasePage extends BasePage {
         return $(TEST_CASE_NAME).getValue();
     }
 
+    @Step("Validation of test case")
     public TestCasePage validateDetails(TestCase testCase) {
         validateFieldValue("Status", testCase.getStatus());
         validateFieldValue("Severity", testCase.getSeverity());

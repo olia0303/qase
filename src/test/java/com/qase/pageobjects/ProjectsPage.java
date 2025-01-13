@@ -3,6 +3,7 @@ package com.qase.pageobjects;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.qase.model.Project;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
@@ -26,11 +27,13 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
+    @Step("Open Project page")
     public ProjectsPage openPage() {
         open(PROJECTS_PAGE_URL);
         return this;
     }
 
+    @Step("Create new project")
     public ProjectsPage createNewProject(Project project) {
         isPageOpened();
         $x(CREATE_BUTTON).click();
@@ -42,6 +45,7 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
+    @Step("Open project by name: {projectName}")
     public ProjectsPage openProjectByName(String projectName) {
         SelenideElement el;
         el = $x(String.format(FIELD_XPATH, projectName));
@@ -49,11 +53,13 @@ public class ProjectsPage extends BasePage {
         return this;
     }
 
+    @Step("Open project settings")
     public ProjectsPage openProjectSettings() {
         $x(SETTINGS).click();
         return this;
     }
 
+    @Step("Delete project")
     public ProjectsPage removeProject() {
         $x(REMOVE_BUTTON).click();
         $x(DELETE_PROJECT).click();
@@ -64,6 +70,7 @@ public class ProjectsPage extends BasePage {
         return $x(String.format(FIELD_XPATH, projectName)).isDisplayed();
     }
 
+    @Step("Open project repository: {code}")
     public ProjectsPage openProjectRepository(String code) {
         open(PROJECT_REPOSITORY_URL + code);
         return this;

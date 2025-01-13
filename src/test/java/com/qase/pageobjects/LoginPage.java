@@ -1,6 +1,7 @@
 package com.qase.pageobjects;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -14,11 +15,13 @@ public class LoginPage extends BasePage {
     private final String USER_PASS = "[name=password]";
     private final String LOGIN_PAGE = BASE_URL + "/login";
 
+    @Step("Open Login page")
     public LoginPage openPage() {
         open(LOGIN_PAGE);
         return this;
     }
 
+    @Step("Login into the system using credentials: {username}, {password}")
     public LoginPage logIn(String username, String password) {
         isPageOpened();
         $(USER_EMAIL).sendKeys(username);
