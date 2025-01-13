@@ -1,6 +1,7 @@
 package com.qase.pageobjects;
 
 import com.qase.model.Suite;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
@@ -31,6 +32,7 @@ public class SuitesPage extends BasePage {
         return this;
     }
 
+    @Step("Create new suite")
     public SuitesPage createNewSuite(Suite suite) {
         $(CREATE_SUITE).shouldBe(visible, Duration.ofSeconds(40));
         $(CREATE_SUITE).click();
@@ -41,11 +43,13 @@ public class SuitesPage extends BasePage {
         return this;
     }
 
+    @Step("Open edit suite page")
     public SuitesPage openEditSuitePage() {
         $x(EDIT_SUITE_BUTTON).click();
         return this;
     }
 
+    @Step("Delete suite")
     public SuitesPage deleteSuite() {
         $x(DELETE_SUITE_BUTTON).click();
         $x(DELETE_BUTTON).click();
@@ -68,6 +72,7 @@ public class SuitesPage extends BasePage {
         $x(SAVE_BUTTON).click();
     }
 
+    @Step("Update suite")
     public SuitesPage updateSuite(Suite suite) {
         $(SUITE_NAME).clear();
         $(SUITE_NAME).sendKeys(suite.getSuiteName());

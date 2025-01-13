@@ -45,7 +45,7 @@ public class SuiteTest extends BaseTest {
         assertEquals(suitesPage.getSuitePreconditions(), suite.getPreconditions());
         suitesPage.save();
         suitesPage.isPageOpened()
-                   .deleteSuite();
+                .deleteSuite();
     }
 
     @Test(description = "Check the updated existing suite")
